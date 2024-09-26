@@ -19,7 +19,21 @@ main{
 div{
     color: black;
     background-color: white;
+    border-style: outset;
+    height: 50px;
+    width: 50px;
+    display:flex;
+    justify-content:center;
+    padding-top:20px ;
+
+
     
+}
+#num{
+    height:50px;
+    font-family: monospace;
+    font-size: medium;
+
 }
 footer{
     color: white;

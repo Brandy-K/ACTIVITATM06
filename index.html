@@ -8,7 +8,7 @@
     </head>
     <body>
         <header>
-            <h1>Busca un numero entre 1 i 10</h1>
+            <h1>Busca un numero entre 1 i 20</h1>
             <button onclick="reiniciarPartida()">Reiniciar!</button>
            
 
@@ -23,30 +23,31 @@
         <input id="num" type="number">
         <button onclick="jugada()">Prova</button>
         <p>Jugades:20</p>
-        <p>Total punts : 0</p>
+        <p id="punts_total">Total punts : 0</p>
         </footer>
-        <script>
+     <script>
             //constants del lloc
          const NUM_JUGADES=20;
          //variables del joc
          let numJugades=NUM_JUGADES;
-         let secretNumber = Math.floor(Math.random() * 10) + 1;
+         let secretNumber = Math.floor(Math.random() * 20) + 1; //genera el numero secret
 
          function reiniciarPartida(){ //this funcion is used to restart the game
 
-            secretNumber = Math.floor(Math.random() * 10) + 1; //el math random para genera el numero secret
+            secretNumber = Math.floor(Math.random() * 20) + 1; //el math random para genera el numero secret
             //let num= document.getElementById("num");
             document.querySelector("main div").textContent = "?"; //para mostro el numero
-            document.querySelector("main h4").textContent = "Comencem la partida"; 
+            document.querySelector("main h4").textContent = "Comencem la partida";
             document.querySelector("footer p").textContent = `Jugades: ${NUM_JUGADES}`;
-            
-            document.getElementById("num").value;
+            document.querySelector("main").style.backgroundColor = 'black';            
+            document.getElementById("num").value='';
             console.log("reiniciarPartida");
+            numJugades = NUM_JUGADES;
          }
-         function jugada() {
-    let num = document.getElementById("num").value;
+         function jugada() { 
+         let num = document.getElementById("num").value;
 
-    if (num) {
+         if (num) {
         console.log("te valor");
 
         let numNumber = Number(num);
@@ -55,34 +56,46 @@
         console.log(numNumber, typeof numNumber);
 
         // Compare the guessed number with the secret number
-        if (numNumber === secretNumber) {
+         if (numNumber === secretNumber) {
+            document.querySelector("footer").style.backgroundColor = 'green';
             document.querySelector("main").style.backgroundColor = 'green'; //when you guess the correct number, the background changes to green.
             document.querySelector("main h4").textContent = "El numero es correcte";
             document.querySelector("main div").textContent = secretNumber; // Show the secret number
+            let Total_punt=0;
+            if(numJugades > Total_punt ){
+                Total_punt = numJugades;
+                document.getElementById("punts_total").textContent = "Total punts :" + Total_punt;
+            }
         } else if (numNumber > secretNumber) {
-            document.querySelector("main h4").textContent = "El número es massa gran"; 
+            document.querySelector("main h4").textContent = "El número es massa gran";
+            //document.getElementsByClassName("main h4").textContent="El número es massa gran";
+            alert("El número introduït no és correcte"); 
         } else {
             document.querySelector("main h4").textContent = "El número es massa petita";
+            alert("El número introduït no és correcte"); 
         }
 
         // If no more attempts are left, end the game
-        if (numJugades <= 0 && numNumber !== secretNumber) {
+         if (numJugades <= 0 && numNumber !== secretNumber) {
             alert(`Game over! El número secret era ${secretNumber}`);
             document.querySelector("main h4").textContent = `Has perdut! El número es ${secretNumber}`;
             document.querySelector("main div").textContent = secretNumber; // Show the secret number
-            document.querySelector("main").style.backgroundColor = 'red';
-        }
+            document.querySelector("main").style.backgroundColor = 'red'; //changes the background color to red whenthe game is over
+         }
 
-        // Update the number of remaining plays in the UI
+          // Update the number of remaining plays
         document.querySelector("footer p").textContent = `Jugades: ${numJugades}`;
-    } else {
+         } else {
         alert("No has introduit cap valor");
-    }
-}
+        }
+        
+        
+     }
+    
 
            
            //comparar el numero amb el numero secret
-        </script>
+     </script>
     </body>
 
     </html>
